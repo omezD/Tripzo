@@ -1,0 +1,54 @@
+<%layout("layouts/boilerplate")-%>
+<body>
+  <%=success%>
+<h1 class="mb-3">All Hotels And Villas</h1>
+
+<form method="GET" action="/listings/new" class="mb-4">
+  <button class="btn btn-danger">New Listing Add</button>
+</form>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+
+  <% for (let listing of listings) { %>
+
+    <div class="col">
+      <div class="card listing-card h-100">
+
+        <!-- Image wrapper -->
+        <div class="img-wrapper">
+          <img
+            src="<%= listing.image.url %>"
+            class="card-img-top"
+            alt="not found"
+          />
+
+          <!-- Overlay -->
+          <div class="img-overlay">
+            <a href="/listings/<%= listing._id %>" class="btn btn-light btn-sm">
+              View
+            </a>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+          <p class="card-text">
+            <strong><%= listing.title %></strong><br>
+          ₹ <%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>/night
+
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer bg-white border-0 text-end">
+          <a href="/listings/<%= listing._id %>/edit" class="btn btn-sm btn-outline-primary">
+            Edit
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  <% } %>
+</div>
+</body>

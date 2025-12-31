@@ -1,0 +1,24 @@
+
+
+
+(() => {
+  'use strict';
+
+  // Fetch all forms with class "needs-validation"
+  const forms = document.querySelectorAll('.needs-validation');
+
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+
+      // If form is invalid, stop submission
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      // Add Bootstrap validation styles
+      form.classList.add('was-validated');
+
+    }, false);
+  });
+})();

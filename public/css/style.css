@@ -1,0 +1,170 @@
+/* Card */
+.card {
+  border: none !important;
+  margin-bottom: 2rem;
+}
+
+/* Image wrapper */
+.img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Image */
+.card-img-top {
+  border-radius: 1rem !important;
+  width: 100% !important;
+  height: 20rem;
+  object-fit: cover !important;
+}
+
+/* Overlay */
+.img-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Show overlay when hovering image wrapper */
+.img-wrapper:hover .img-overlay {
+  opacity: 1;
+}
+
+/* Page background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* Center wrapper */
+.form-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card */
+.form-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.form-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 18px;
+}
+
+/* Labels */
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Inputs */
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #ff385c;
+  box-shadow: 0 0 0 2px rgba(255, 56, 92, 0.2);
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #ff385c;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.submit-btn:hover {
+  background-color: #e0314f;
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* //review button */
+#rb{
+  color: white;
+  background-color: blue;
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#rb:hover {
+  background-color: #e75123;
+}
+
+/* Reviews section */
+.reviews-section {
+  margin-top: 20px;
+}
+
+.reviews-section h4 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.reviews-list {
+  list-style: none;
+  padding: 0;
+}
+
+
+.reviews-list li {
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+
+.reviews-list span {
+  display: block;
+  margin-bottom: 4px;
+}
+.rating-range {
+  width: 439px;
+  accent-color: #0d6efd;
+}

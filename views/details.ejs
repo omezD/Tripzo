@@ -1,0 +1,126 @@
+<%layout("/layouts/boilerplate")-%>
+
+<body>
+  <div class="form-wrapper">
+    <div class="form-card">
+      <h1 class="form-title"><%= listing.title %></h1>
+
+      <!-- Image -->
+      <div class="form-group">
+        <img
+          src="<%= listing.image.url %>"
+          alt="listing image"
+          style="
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 8px;
+          "
+        />
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <div class="form-control" style="background: #f9f9f9">
+          <%= listing.description %>
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="form-group">
+        <label class="form-label">Price</label>
+        <div class="form-control" style="background: #f9f9f9">
+          ₹ <%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>
+          / night
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="form-group">
+        <label class="form-label">Location</label>
+        <div class="form-control" style="background: #f9f9f9">
+          <%= listing.location %>, <%= listing.country %>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; gap: 12px; margin-top: 20px">
+        <a
+          href="/listings/<%= listing._id %>/edit"
+          class="submit-btn"
+          style="text-align: center; flex: 1"
+        >
+          Edit Listing
+        </a>
+
+        <form
+          method="POST"
+          action="/listings/<%= listing._id %>?_method=DELETE"
+          style="flex: 1"
+        >
+          <button type="submit" class="submit-btn" style="background: #333">
+            Delete Listing
+          </button>
+        </form>
+      </div>
+
+      <!-- //now review section -->
+      <div>
+        <hr />
+        <h3>Leave your Review</h3>
+        <form
+          novalidate
+          class="needs-validation"
+          method="POST"
+          action="/listings/<%=listing.id%>/review"
+        >
+          <div>
+            <label for="customRange1" class="form-label">Range</label>
+            <input
+              class="rating-range"
+              name="review[rating]"
+              type="range"
+              min="1"
+              max="5"
+            />
+          </div>
+
+          <div>
+            <label class="form-label" for="comment">Comment</label>
+            <textarea
+              class="form-control"
+              name="review[comment]"
+              rows="5"
+              cols="30"
+              id="comment"
+              required
+            ></textarea>
+            <div class="valid-feedback">Looks good</div>
+            <div class="invalid-feedback">Comment is required</div>
+          </div>
+          <br />
+          <button id="rb">Submit</button>
+        </form>
+      </div>
+
+      <!-- //all reviews -->
+      <hr />
+      <div class="reviews-section">
+        <h4>All reviews</h4>
+        <ul class="reviews-list">
+          <%for(review of listing.reviews){%>
+          <li>
+            <span><strong>Comment:</strong> <%= review.comment %></span>
+            <span><strong>Rating:</strong> <%= review.rating %> Star</span>
+            <span><strong>Created at:</strong> <%= review.created_at %></span>
+            <form class="mb-3" action="/listings/<%=listing.id%>/review/<%=review.id%>?_method=DELETE" method="POST">
+              <button>Delete this review</button>
+            </form>
+          </li>
+          <%}%>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
