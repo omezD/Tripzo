@@ -8,6 +8,10 @@ const path = require("path");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport=require("passport");
+const LocalStrategy=require("passport-local");
+const User=require("./models/user.js");
+
 
 const sessionOptions = {
   secret: "mysupersecret",
@@ -23,8 +27,9 @@ const sessionOptions = {
 
 
 const port = 3000;
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -53,6 +58,14 @@ app.get("/", (req, res) => {
 app.use(session(sessionOptions));
 app.use(flash());
 
+//use of passport
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 //for creating and passing flash MW
 app.use((req, res, next)=>{
   res.locals.success=req.flash("success");
@@ -60,11 +73,22 @@ app.use((req, res, next)=>{
   next();
 })
 
+app.use("/demouser", async (req, res)=>{
+  let fakeUser=new User({
+    email:"student@gmail.com",
+    username:"delta-student"
+  })
+
+  let registeredUser=await User.register(fakeUser, "helloworld");//registeredUser, password
+  res.send(registeredUser);
+})
+
 //all the routes
 //for the whole listings routes, just write the one line
-app.use("/listings", listings);
+app.use("/listings", listingRouter);
 //for the whole review routes, just write the one line
-app.use("/listings/:id/review", reviews);
+app.use("/listings/:id/review", reviewRouter);
+app.use("/", userRouter);
 
 //MW= joi , server site validation apply, made a function an dapply in the api call
 
