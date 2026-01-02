@@ -18,7 +18,7 @@
           "
         />
       </div>
-
+      Owned by : <i><%=listing.owner.username%></i> <br />
       <!-- Description -->
       <div class="form-group">
         <label class="form-label">Description</label>
@@ -45,6 +45,9 @@
       </div>
 
       <!-- Action Buttons -->
+
+      <!-- \authorisation -->
+      <%if(currUser && currUser._id.equals(listing.owner._id)){%>
       <div style="display: flex; gap: 12px; margin-top: 20px">
         <a
           href="/listings/<%= listing._id %>/edit"
@@ -64,8 +67,11 @@
           </button>
         </form>
       </div>
+      <%}%>
 
       <!-- //now review section -->
+      <%if(currUser ){%> 
+        <!-- //if not login, cant create the review -->
       <div>
         <hr />
         <h3>Leave your Review</h3>
@@ -103,6 +109,7 @@
           <button id="rb">Submit</button>
         </form>
       </div>
+      <%}%>
 
       <!-- //all reviews -->
       <hr />
@@ -114,7 +121,11 @@
             <span><strong>Comment:</strong> <%= review.comment %></span>
             <span><strong>Rating:</strong> <%= review.rating %> Star</span>
             <span><strong>Created at:</strong> <%= review.created_at %></span>
-            <form class="mb-3" action="/listings/<%=listing.id%>/review/<%=review.id%>?_method=DELETE" method="POST">
+            <form
+              class="mb-3"
+              action="/listings/<%=listing.id%>/review/<%=review.id%>?_method=DELETE"
+              method="POST"
+            >
               <button>Delete this review</button>
             </form>
           </li>
