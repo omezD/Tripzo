@@ -40,18 +40,17 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-main()
+const dbUrl =
+  process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wanderlust";
+
+mongoose.connect(dbUrl)
   .then(() => {
-    console.log("connected to DB");
+    console.log("MongoDB connected successfully");
   })
   .catch((err) => {
-    console.log(err);
+    console.log("MongoDB connection error:", err);
   });
 
-async function main() {
-  await mongoose.connect(MONGO_URL);
-}
 
 app.use(session(sessionOptions));
 app.use(flash());
