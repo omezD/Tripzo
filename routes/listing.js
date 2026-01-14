@@ -44,10 +44,11 @@ router.post(
     let listingData = req.body.listing;
 
     // 🔥 FIX: convert image string → object
-    listingData.image = {
+    listing.image = {
       filename: "listingimage",
-      url: listingData.image
+      url: listing.image,
     };
+    
 
     let newListing = new Listing(listingData);
     newListing.owner = req.user._id;
