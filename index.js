@@ -100,9 +100,10 @@ app.all(/.*/, (req, res, next) => {
 app.use((err, req, res, next) => {
   let {
     statusCode = 500,
-    message = "something wait ewrong bro, default eerror message",
+    message = "something went wrong",
   } = err;
-  res.render("error.ejs", { err });
+  err.message = message;
+  res.status(statusCode).render("error.ejs", { err });
   // res.status(statusCode).send(message);//customised response
   // res.send("something went wrong");//standard rsponse
 });
