@@ -8,6 +8,7 @@ router.get("/", (req, res) => {
   res.render("ai.ejs");
 });
 
+//this is the main routes
 router.post("/ask", async (req, res) => {
   try {
     const { question } = req.body;
