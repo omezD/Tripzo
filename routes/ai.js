@@ -9,7 +9,8 @@ router.get("/", (req, res) => {
 });
 
 //this is the main routes
-//and this is the basic for this kind of routes
+//and this is the basic for this kind of 
+//and this is the 
 router.post("/ask", async (req, res) => {
   try {
     const { question } = req.body;
